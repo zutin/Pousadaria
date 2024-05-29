@@ -42,4 +42,26 @@ describe 'Inn owner registers a group booking' do
       expect(page).to have_content('03/06/2024')
     end
   end
+
+  it 'shouldnt be able to register a group booking with wrong checkin/checkout date information' do
+    #Arrange
+    inn_owner = InnOwner.create!(first_name: 'Joao', last_name: 'Almeida',  document: '53783222001', email: 'joao@email.com', password: '123456')
+    inn_owner.create_inn!(name: 'Pousada do Almeidinha', registration_number: '30638898000199', description: 'Um bom lugar', 
+                                address_attributes: { address: 'Rua X', number: '100', city: 'Manaus', state: 'AM', postal_code: '69067-080', neighborhood: 'Centro'})
+
+    #Act
+    login_as inn_owner, scope: :inn_owner
+    visit root_path
+    click_on 'Gestão de Pousadas'
+
+    click_on 'Nova reserva de grupo'
+    fill_in 'Nome da reserva', with: 'Confraternização da Campus Code'
+    fill_in 'Data de chegada', with: '2024-06-03'
+    fill_in 'Data de saída', with: '2024-06-01'
+    click_on 'Criar Reserva de grupo'
+
+    #Assert
+    expect(page).to have_content('Data de chegada não pode ser depois do check-out')
+    expect(page).to have_content('Data de saída não pode ser antes do check-in')
+  end
 end

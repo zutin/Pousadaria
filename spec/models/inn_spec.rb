@@ -8,6 +8,7 @@ RSpec.describe Inn, type: :model do
     it { should belong_to(:inn_owner) }
     it { should have_one(:address) }
     it { should have_many(:inn_rooms) }
+    it { should have_many(:group_bookings) }
 
     it { should accept_nested_attributes_for(:address)}
   end

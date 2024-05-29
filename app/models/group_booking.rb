@@ -24,7 +24,7 @@ class GroupBooking < ApplicationRecord
   end
 
   def checkin_date_cannot_be_after_checkout_date
-    if checkin_date.present? && checkout_date.present?  && checkin_date > checkou_date
+    if checkin_date.present? && checkout_date.present?  && checkin_date > checkout_date
       errors.add(:checkin_date, "não pode ser depois do check-out")
     end
   end
