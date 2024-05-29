@@ -14,7 +14,7 @@ describe 'Inn owner registers a group booking' do
     click_on 'Nova reserva de grupo'
 
     #Assert
-    expect(current_path).to eq new_inn_dashboard_inns_group_bookings_path
+    expect(current_path).to eq new_inn_dashboard_inns_group_booking_path
   end
 
   it 'can register a new group booking successfully' do

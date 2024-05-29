@@ -1,0 +1,28 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to 'Gestão de Pousadas', inn_management_path %></li>
+    <li class="breadcrumb-item"><%= @inn.name %></li>
+    <li class="breadcrumb-item">Reservas de grupo</li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @group_booking.name %></li>
+  </ol>
+</nav>
+<h1 class="mb-3"><%= @group_booking.name %></h1>
+<p>Data de chegada: <%= l(@group_booking.checkin_date) %></p>
+<p>Data de saída: <%= l(@group_booking.checkout_date) %></p>
+
+<h1 class="my-3">Quartos reservados</h1>
+  <% if @group_booking.group_booking_room.present? %>
+    <% @inn.group_booking_room.each do |room| %>
+      <div class="col-4">
+        <div class="card"> 
+          <div class="card-body">
+            <h2><%= room.name %></h2>
+            <span>Quantidade de hóspedes: <%= room.guests %></span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+  <p>Essa reserva ainda não possui nenhum quarto vinculado.</p>
+  <% end %>
+<%= link_to 'Adicionar novo quarto', new_inn_dashboard_inns_group_booking_group_booking_room_path(@group_booking), class: 'btn btn-primary' %>

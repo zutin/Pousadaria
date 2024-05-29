@@ -1,5 +1,6 @@
 class GroupBooking < ApplicationRecord
   belongs_to :inn
+  has_many :group_booking_room
 
   validates :name, :checkin_date, :checkout_date, presence: true
   validates :name, length: { in: 3..50 }

@@ -1,5 +1,6 @@
 class InnRoom < ApplicationRecord
   belongs_to :inn
+  has_many :group_booking_room
   has_one_attached :photo
 
   validates :name, presence: true

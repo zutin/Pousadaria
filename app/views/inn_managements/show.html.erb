@@ -39,10 +39,10 @@
           <div class="col-4">
             <div class="card"> 
               <div class="card-body">
-                <%= link_to root_path do %>
+                <%= link_to inn_dashboard_inns_group_booking_path(book) do %>
                   <h2><%= book.name %></h2>
                 <% end %>
-                <span><%= l(book.checkin_date) %> - <%= l(book.checkout_date) %></span>
+                <span>De <%= l(book.checkin_date) %> à <%= l(book.checkout_date) %></span>
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@
       <p>Ainda não há nenhuma reserva de grupo.</p>
       <% end %>
     </div>
-    <%= link_to 'Nova reserva de grupo', new_inn_dashboard_inns_group_bookings_path, class: 'btn btn-primary' %>
+    <%= link_to 'Nova reserva de grupo', new_inn_dashboard_inns_group_booking_path, class: 'btn btn-primary' %>
   </section>
 <% else %>
   <h1>Pousadaria</h1>

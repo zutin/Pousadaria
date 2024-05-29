@@ -1,0 +1,28 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to 'Gestão de Pousadas', inn_management_path %></li>
+    <li class="breadcrumb-item"><%= @inn.name %></li>
+    <li class="breadcrumb-item">Reservas de grupo</li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @group_booking.name %></li>
+  </ol>
+</nav>
+<% if inn_owner_signed_in? %>
+  <h1>Vinculando quarto a <%= @group_booking.name %></h1>
+  <%= render partial: 'shared/record_errors', locals: { record: @group_booking_room } %>
+  <%= form_with(model: @group_booking_room, url: inn_dashboard_inns_group_booking_group_booking_room_path) do |f| %>
+    <div class="mb-3">
+      <%= f.label :name, class: "form-label" %>
+      <%= f.collection_select :inn_room_id, @inn_rooms, :id, :name %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :guests, class: "form-label" %>
+      <%= f.number_field :guests, class: "form-control" %>
+    </div>
+    <%= f.submit class: 'btn btn-success' %>
+  <% end %>
+<% else %>
+  <h1>Pousadaria</h1>
+  <p class="lead mb-3">Entre para gerenciar sua pousada.</p>
+  <%= link_to 'Entrar', new_inn_owner_session_path, class: 'btn btn-primary' %>
+  <%= link_to 'Criar nova conta', new_inn_owner_registration_path, class: 'btn btn-success' %>
+<% end %>

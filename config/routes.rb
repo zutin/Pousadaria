@@ -15,8 +15,11 @@ Rails.application.routes.draw do
   namespace :inn_dashboard do
     resource :inns, only: [:edit, :update] do
       resource :inn_rooms, only: [:new, :create]
-      resource :group_bookings, only: [:new, :create]
+      resources :group_bookings, only: [:show, :new, :create] do
+        resource :group_booking_room, only: [:new, :create]
+      end
     end
+
 
     resources :inn_rooms, only: [:show, :edit, :update]
   end

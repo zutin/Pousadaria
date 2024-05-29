@@ -18,6 +18,10 @@ class InnDashboard::GroupBookingsController < ApplicationController
     end
   end
 
+  def show
+    @group_booking = GroupBooking.find(params[:id])
+  end
+
   private
   def set_current_inn
     @inn = current_inn_owner.inn
