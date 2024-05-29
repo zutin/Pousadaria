@@ -31,6 +31,28 @@
     </div>
     <%= link_to 'Cadastrar Quarto', new_inn_dashboard_inns_inn_rooms_path, class: 'btn btn-primary' %>
   </section>
+  <section id="group-bookings" class="mt-3">
+    <h2>Reservas de grupo</h2>
+    <div class="row my-3">
+      <% if @inn.group_bookings.present? %>
+        <% @inn.group_bookings.each do |book| %>
+          <div class="col-4">
+            <div class="card"> 
+              <div class="card-body">
+                <%= link_to root_path do %>
+                  <h2><%= book.name %></h2>
+                <% end %>
+                <span><%= l(book.checkin_date) %> - <%= l(book.checkout_date) %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+      <p>Ainda não há nenhuma reserva de grupo.</p>
+      <% end %>
+    </div>
+    <%= link_to 'Nova reserva de grupo', new_inn_dashboard_inns_group_bookings_path, class: 'btn btn-primary' %>
+  </section>
 <% else %>
   <h1>Pousadaria</h1>
   <p class="lead mb-3">Entre para gerenciar sua pousada.</p>
